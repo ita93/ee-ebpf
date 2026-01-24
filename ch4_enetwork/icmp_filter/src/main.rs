@@ -11,7 +11,7 @@ use libc::{
 
 fn open_fd() -> Result<i32> {
     unsafe {
-        match socket(AF_PACKET, SOCK_RAW, ETH_P_ALL.to_be() as i32) {
+        match socket(AF_PACKET, SOCK_RAW, (ETH_P_ALL as u16).to_be() as i32) {
             -1 => Err(io::Error::last_os_error().into()),
             fd => Ok(fd),
         }
